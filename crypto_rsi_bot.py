@@ -5,6 +5,22 @@ import pandas as pd
 import pandas_ta as ta
 import time
 
+# Add near the top of your script
+TELEGRAM_BOT_TOKEN = "123456789:ABCdefGHIjkLMNopQRstUVwxyz"
+TELEGRAM_CHAT_ID = "987654321"
+
+def send_telegram_message(message):
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": message
+    }
+    try:
+        requests.post(url, data=payload)
+    except Exception as e:
+        print(f"Telegram error: {e}")
+
+
 # STEP 1: Get top 10 coins by market cap from CoinGecko
 def get_top_coins(limit=10):
     url = "https://api.coingecko.com/api/v3/coins/markets"
